@@ -1,17 +1,32 @@
 <?php
 
-$conexion = @new mysqli(
-    "127.0.0.1",
-    "root",
-    "",
-    "manos_de_chichi",
-    3307
-);
+require_once __DIR__ . '/../app/config/database.php';
 
-if ($conexion->connect_error) {
-    die("Error de conexión: " . $conexion->connect_error);
+$archivoControlador = __DIR__ . '/../app/controllers/ProductoController.php';
+
+if (!file_exists($archivoControlador)) {
+    die('ERROR: No se encuentra el archivo ProductoController.php en: '
+        . htmlspecialchars($archivoControlador));
 }
 
-echo "¡CONEXIÓN EXITOSA!";
+require_once $archivoControlador;
 
-$conexion->close();
+if (!class_exists('ProductoController')) {
+    die('ERROR: El archivo existe, pero no se ha declarado la clase ProductoController. Revisa el nombre de la clase y el contenido del archivo.');
+}
+
+try {
+    $baseDatos = new Database();
+    $conexion = $baseDatos->conectar();
+
+    $controlador = new ProductoController($conexion);
+    $controlador->manejarSolicitud();
+
+} catch (Throwable $e) {
+    http_response_code(500);
+
+    echo '<h2>Error de PHP</h2>';
+    echo '<pre>' . htmlspecialchars($e->getMessage()) . '</pre>';
+    echo '<p>Archivo: ' . htmlspecialchars($e->getFile()) . '</p>';
+    echo '<p>Línea: ' . (int) $e->getLine() . '</p>';
+}
