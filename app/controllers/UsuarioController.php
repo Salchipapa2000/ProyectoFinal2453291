@@ -41,7 +41,7 @@ class UsuarioController
                     $_SESSION['nombre'] = $datos['nombre'];
                     $_SESSION['rol'] = $datos['rol'];
 
-                    header('Location: index.php?accion=listar');
+                    header('Location: index.php?accion=inicio');
                     exit;
                 }
             }

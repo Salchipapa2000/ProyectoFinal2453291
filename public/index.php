@@ -18,7 +18,7 @@ try {
 
     $usuarioController = new UsuarioController($conexion);
 
-    $accion = $_GET['accion'] ?? 'listar';
+    $accion = $_GET['accion'] ?? 'inicio';
 
     // Acciones públicas.
     if ($accion === 'login') {
@@ -50,6 +50,12 @@ try {
     ) {
         http_response_code(403);
         echo "No tienes permisos para realizar esta acción.";
+        exit;
+    }
+
+    // Mostrar el menú principal.
+    if ($accion === 'inicio') {
+        require __DIR__ . '/../app/views/inicio.php';
         exit;
     }
 

@@ -15,6 +15,12 @@
             Registrar producto
         </a>
 
+        <div style="margin-bottom: 20px;">
+            <a href="index.php?accion=inicio" class="boton">
+                ← Volver al menú principal
+            </a>
+        </div>
+
         <?php if (empty($productos)): ?>
             <p>No hay productos registrados todavía.</p>
         <?php else: ?>
@@ -66,6 +72,7 @@
                                             name="id"
                                             value="<?= (int) $producto['id'] ?>"
                                         >
+
                                         <button type="submit" class="boton-eliminar">
                                             Eliminar
                                         </button>
