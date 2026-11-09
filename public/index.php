@@ -59,7 +59,20 @@ try {
     $controlador->manejarSolicitud();
     }
 
-} catch (Throwable $e) {
+    if (in_array($accion, [
+    'ventas',
+    'registrar_venta',
+    'consultar_existencia',
+    'liquidaciones'
+    ], true)) {
+    $controlador = new VentaController($conexion);
+    $controlador->manejarSolicitud();
+    } else {
+    $controlador = new ProductoController($conexion);
+    $controlador->manejarSolicitud();
+    }
+
+    } catch (Throwable $e) {
 
     http_response_code(500);
     error_log($e->getMessage());

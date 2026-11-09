@@ -31,6 +31,22 @@ class VentaController
             return;
         }
 
+        if ($accion === 'liquidaciones') {
+            $mes = (int) ($_GET['mes'] ?? date('m'));
+            $anio = (int) ($_GET['anio'] ?? date('Y'));
+
+        if ($mes < 1 || $mes > 12 || $anio < 2000 || $anio > 2100) {
+            http_response_code(400);
+            echo "Período inválido.";
+            return;
+        }
+
+        $liquidaciones = $this->modelo->liquidacionMensual($mes, $anio);
+
+        require __DIR__ . '/../views/ventas/liquidaciones.php';
+        return;
+        }
+
         http_response_code(404);
         echo "Acción no encontrada.";
     }

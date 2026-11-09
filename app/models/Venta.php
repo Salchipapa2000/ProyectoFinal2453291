@@ -132,4 +132,33 @@ class Venta
 
         return $this->conexion->query($sql)->fetch_all(MYSQLI_ASSOC);
     }
+
+    public function liquidacionMensual(int $mes, int $anio): array
+    {
+    $sql = "SELECT
+                a.id AS artesano_id,
+                a.nombre AS artesano,
+                p.nombre AS producto,
+                SUM(d.cantidad) AS unidades_vendidas,
+                SUM(d.subtotal) AS monto_vendido,
+                SUM(d.subtotal) * 0.80 AS monto_pagar
+            FROM detalle_ventas d
+            INNER JOIN ventas v ON d.venta_id = v.id
+            INNER JOIN productos p ON d.producto_id = p.id
+            INNER JOIN artesanos a ON p.artesano_id = a.id
+            WHERE MONTH(v.fecha) = ?
+              AND YEAR(v.fecha) = ?
+            GROUP BY a.id, a.nombre, p.id, p.nombre
+            ORDER BY a.nombre, p.nombre";
+
+    $stmt = $this->conexion->prepare($sql);
+    $stmt->bind_param("ii", $mes, $anio);
+    $stmt->execute();
+
+    $resultado = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+
+    $stmt->close();
+
+    return $resultado;
+    }
 }
