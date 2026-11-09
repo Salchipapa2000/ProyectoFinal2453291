@@ -1,4 +1,4 @@
-```sql
+sql
 CREATE DATABASE IF NOT EXISTS manos_de_chichi
 CHARACTER SET utf8mb4
 COLLATE utf8mb4_unicode_ci;
@@ -40,10 +40,24 @@ CREATE TABLE IF NOT EXISTS productos (
         ON DELETE RESTRICT
 ) ENGINE=InnoDB;
 
+-- Tabla de usuarios del sistema
+CREATE TABLE IF NOT EXISTS usuarios (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
+    usuario VARCHAR(50) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    rol ENUM('administrador', 'vendedor') NOT NULL,
+    estado TINYINT(1) NOT NULL DEFAULT 1,
+    fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT chk_usuario_estado
+        CHECK (estado IN (0, 1))
+) ENGINE=InnoDB;
+
 -- Datos de prueba para comenzar a trabajar
 INSERT INTO artesanos (nombre, comunidad, especialidad, telefono)
 VALUES
 ('María López', 'Chichicastenango', 'Textiles', '5555-1234'),
 ('Pedro Ajanel', 'Chichicastenango', 'Máscaras', '5555-5678'),
 ('Ana Pérez', 'Santa Cruz del Quiché', 'Cerámica', '5555-9012');
-```
+
