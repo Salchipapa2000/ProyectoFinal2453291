@@ -36,6 +36,8 @@ function escapar($valor) {
 
     <form action="index.php?accion=registrar_venta" method="POST">
 
+    <?= campoTokenCSRF() ?>
+
         <div id="productos-container">
 
             <div class="fila-producto">

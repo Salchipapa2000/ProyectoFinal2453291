@@ -2,6 +2,10 @@
 
 session_start();
 
+require_once __DIR__ . '/../app/config/csrf.php';
+
+generarTokenCSRF();
+
 require_once __DIR__ . '/../app/config/database.php';
 require_once __DIR__ . '/../app/controllers/ProductoController.php';
 require_once __DIR__ . '/../app/controllers/UsuarioController.php';
@@ -33,8 +37,7 @@ try {
         exit;
     }
 
-    // Restricción temporal: solamente administradores
-    // pueden administrar productos.
+    // Restricción de acceso para administradores.
     $accionesAdministrativas = [
         'crear',
         'editar',
@@ -50,29 +53,23 @@ try {
         exit;
     }
 
-    if (in_array($accion, ['ventas', 'registrar_venta', 'consultar_existencia'], true)) {
-    $controlador = new VentaController($conexion);
-    $controlador->manejarSolicitud();
+    // Enviar la solicitud al controlador correspondiente.
+    $accionesVentas = [
+        'ventas',
+        'registrar_venta',
+        'consultar_existencia',
+        'liquidaciones'
+    ];
 
+    if (in_array($accion, $accionesVentas, true)) {
+        $controlador = new VentaController($conexion);
     } else {
-    $controlador = new ProductoController($conexion);
-    $controlador->manejarSolicitud();
+        $controlador = new ProductoController($conexion);
     }
 
-    if (in_array($accion, [
-    'ventas',
-    'registrar_venta',
-    'consultar_existencia',
-    'liquidaciones'
-    ], true)) {
-    $controlador = new VentaController($conexion);
     $controlador->manejarSolicitud();
-    } else {
-    $controlador = new ProductoController($conexion);
-    $controlador->manejarSolicitud();
-    }
 
-    } catch (Throwable $e) {
+} catch (Throwable $e) {
 
     http_response_code(500);
     error_log($e->getMessage());

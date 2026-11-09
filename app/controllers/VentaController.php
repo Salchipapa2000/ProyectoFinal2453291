@@ -58,6 +58,12 @@ class VentaController
             return;
         }
 
+        if (!validarTokenCSRF()) {
+            http_response_code(403);
+            echo "Solicitud rechazada: token de seguridad inválido.";
+            return;
+        }
+
         $productos = $_POST['productos'] ?? [];
 
         if (!is_array($productos) || empty($productos)) {

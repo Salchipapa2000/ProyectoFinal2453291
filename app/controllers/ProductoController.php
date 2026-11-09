@@ -55,6 +55,7 @@ class ProductoController
         $artesanos = $this->modelo->obtenerArtesanos();
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
             $artesano_id = filter_input(
                 INPUT_POST,
                 'artesano_id',
@@ -77,6 +78,12 @@ class ProductoController
                 $minimaTexto,
                 FILTER_VALIDATE_INT
             );
+
+            if (!validarTokenCSRF()) {
+                http_response_code(403);
+                echo "Solicitud rechazada: token de seguridad inválido.";
+                return;
+            }
 
             if (
                 !$artesano_id ||
@@ -117,6 +124,12 @@ class ProductoController
     private function editar(): void
     {
         $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
+
+        if (!validarTokenCSRF()) {
+                http_response_code(403);
+                echo "Solicitud rechazada: token de seguridad inválido.";
+                return;
+            }
 
         if (!$id) {
             http_response_code(400);
@@ -207,6 +220,12 @@ class ProductoController
             'id',
             FILTER_VALIDATE_INT
         );
+
+        if (!validarTokenCSRF()) {
+            http_response_code(403);
+            echo "Solicitud rechazada: token de seguridad inválido.";
+            return;
+        }
 
         if (!$id) {
             http_response_code(400);

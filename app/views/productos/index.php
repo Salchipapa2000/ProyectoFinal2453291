@@ -60,6 +60,7 @@
                                         method="POST"
                                         onsubmit="return confirm('¿Seguro que deseas eliminar este producto?');"
                                     >
+                                    <?= campoTokenCSRF() ?>
                                         <input
                                             type="hidden"
                                             name="id"

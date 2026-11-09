@@ -22,6 +22,7 @@
             </p>
         <?php else: ?>
             <form method="POST" action="index.php?accion=crear">
+                <?= campoTokenCSRF() ?>
                 <label for="artesano_id">Artesano</label>
                 <select name="artesano_id" id="artesano_id" required>
                     <option value="">Selecciona un artesano</option>
