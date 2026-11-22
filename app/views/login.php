@@ -13,7 +13,8 @@
 
     <main class="contenedor">
 
-        <h1>Manos de Chichi</h1>
+        <h1> <i class="fa-solid fa-hands-holding-circle"></i> Manos de Chichi
+        <i class="fa-solid fa-hands-holding-circle"></i> </h1>
         <h2>Iniciar sesión</h2>
 
         <?php if ($error): ?>
