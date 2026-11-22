@@ -15,6 +15,7 @@ foreach ($liquidaciones as $fila) {
 <!DOCTYPE html>
 <html lang="es">
 <head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <meta charset="UTF-8">
     <title>Liquidación mensual</title>
     <link rel="stylesheet" href="css/estilos.css">
@@ -41,7 +42,7 @@ foreach ($liquidaciones as $fila) {
         <label>Año:</label>
         <input type="number" name="anio" value="<?= $anio ?>" min="2000" max="2100">
 
-        <button type="submit">Consultar</button>
+        <button type="submit"> <i class="fa-solid fa-solidLarge fa-navicon">‌</i> Consultar</button>
     </form>
 
     <h3>Período: <?= escaparLiquidacion($mes) ?>/<?= escaparLiquidacion($anio) ?></h3>
@@ -84,8 +85,23 @@ foreach ($liquidaciones as $fila) {
         </tfoot>
     </table>
 
-    <p><a href="index.php?accion=ventas">Volver a ventas</a></p>
-    <p><a href="index.php?accion=listar">Volver a productos</a></p>
+    <pre></pre>
+
+    <a class="boton" href="index.php?accion=ventas">
+                <i class="fa-solid fa-cash-register"></i> Ir a ventas
+            </a>
+
+    <a class="boton" href="index.php?accion=listar">
+                <i class="fa-solid fa-box-open"></i> Ir a productos
+            </a>
+
+    <a class="boton" href="index.php?accion=inicio">
+                <i class="fa-solid fa-house"></i> Ir al inicio
+            </a>
+
+    <a class="boton" href="index.php?accion=logout">
+                <i class="fa-solid fa-solidLarge fa-sign-in">‌</i> Cerrar sesión
+            </a>
 
 </div>
 

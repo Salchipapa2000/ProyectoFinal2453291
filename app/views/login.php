@@ -2,6 +2,7 @@
 <html lang="es">
 
 <head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Iniciar sesión - Manos de Chichi</title>
@@ -23,7 +24,7 @@
 
         <form method="POST" action="index.php?accion=login">
 
-            <label for="usuario">Usuario:</label>
+            <label for="usuario"> <i class="fa-regular fa-user"></i> Usuario:</label>
             <input
                 type="text"
                 id="usuario"
@@ -32,7 +33,7 @@
                 autocomplete="username"
             >
 
-            <label for="password">Contraseña:</label>
+            <label for="password"> <i class="fa-solid fa-lock"></i> Contraseña:</label>
             <input
                 type="password"
                 id="password"

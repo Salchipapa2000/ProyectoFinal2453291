@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registrar producto | Manos de Chichi</title>
@@ -90,13 +91,14 @@
                     required
                 >
 
-                <button type="submit" class="boton">Guardar producto</button>
+                <button type="submit" class="boton"> <i class="fa-solid fa-solidLarge fa-bookmark">‌</i> Guardar producto</button>
+
+                <a class="boton" href="index.php?accion=listar">
+                <i class="fa-solid fa-solidLarge fa-reply">‌</i> Regresar
+            </a>
+            
             </form>
         <?php endif; ?>
-
-        <a class="enlace-volver" href="index.php?accion=listar">
-            Volver al inventario
-        </a>
     </main>
 </body>
 </html>

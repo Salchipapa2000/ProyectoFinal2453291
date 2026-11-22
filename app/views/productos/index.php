@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inventario | Manos de Chichi</title>
@@ -11,15 +12,17 @@
         <h1>Inventario de productos</h1>
         <p>Gestión de los productos artesanales de Manos de Chichi.</p>
 
-        <a class="boton" href="index.php?accion=crear">
+        <a class="boton" href="index.php?accion=crear"> <i class="fa-solid fa-solidLarge fa-plus">‌</i>
             Registrar producto
         </a>
 
-        <div style="margin-bottom: 20px;">
-            <a href="index.php?accion=inicio" class="boton">
-                ← Volver al menú principal
+
+        <a class="boton" href="index.php?accion=inicio">
+                <i class="fa-solid fa-house"></i> Ir al inicio
             </a>
-        </div>
+        <a class="boton" href="index.php?accion=logout">
+                <i class="fa-solid fa-solidLarge fa-sign-in">‌</i> Cerrar sesión
+            </a>
 
         <?php if (empty($productos)): ?>
             <p>No hay productos registrados todavía.</p>

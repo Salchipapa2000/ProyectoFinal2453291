@@ -54,6 +54,41 @@ CREATE TABLE IF NOT EXISTS usuarios (
         CHECK (estado IN (0, 1))
 ) ENGINE=InnoDB;
 
+-- Tabla de ventas
+CREATE TABLE IF NOT EXISTS ventas (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    usuario_id INT NOT NULL,
+    total DECIMAL(10,2) NOT NULL,
+    fecha DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT fk_venta_usuario
+        FOREIGN KEY (usuario_id)
+        REFERENCES usuarios(id)
+        ON UPDATE CASCADE
+        ON DELETE RESTRICT
+) ENGINE=InnoDB;
+
+-- Tabla detalle de ventas
+CREATE TABLE IF NOT EXISTS detalle_ventas (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    venta_id INT NOT NULL,
+    producto_id INT NOT NULL,
+    cantidad INT NOT NULL,
+    precio_unitario DECIMAL(10,2) NOT NULL,
+    subtotal DECIMAL(10,2) NOT NULL,
+
+    CONSTRAINT fk_detalle_venta
+        FOREIGN KEY (venta_id)
+        REFERENCES ventas(id)
+        ON DELETE CASCADE,
+
+    CONSTRAINT fk_detalle_producto
+        FOREIGN KEY (producto_id)
+        REFERENCES productos(id)
+        ON UPDATE CASCADE
+        ON DELETE RESTRICT
+) ENGINE=InnoDB;
+
 -- Datos de prueba para comenzar a trabajar
 INSERT INTO artesanos (nombre, comunidad, especialidad, telefono)
 VALUES

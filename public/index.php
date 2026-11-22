@@ -45,12 +45,13 @@ try {
     ];
 
     if (
-        in_array($accion, $accionesAdministrativas, true) &&
-        $_SESSION['rol'] !== 'administrador'
+      in_array($accion, $accionesAdministrativas, true) &&
+      $_SESSION['rol'] !== 'administrador'
     ) {
-        http_response_code(403);
-        echo "No tienes permisos para realizar esta acción.";
-        exit;
+      http_response_code(403);
+      $mensajeAcceso = "No tienes permisos para realizar esta acción.";
+      require __DIR__ . '/../app/views/sin_permiso.php';
+      exit;
     }
 
     // Mostrar el menú principal.

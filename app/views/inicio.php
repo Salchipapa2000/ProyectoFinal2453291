@@ -9,9 +9,10 @@ $esAdministrador = $_SESSION['rol'] === 'administrador';
 <!DOCTYPE html>
 <html lang="es">
 <head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Panel principal | Manos de Chichi</title>
+    <title> Panel principal | Manos de Chichi</title>
     <link rel="stylesheet" href="css/estilos.css">
 
     <style>
@@ -86,7 +87,7 @@ $esAdministrador = $_SESSION['rol'] === 'administrador';
 
     <section class="bienvenida">
 
-        <h1>Manos de Chichi</h1>
+        <h1> <i class="fa-solid fa-hands-holding-circle"></i> Manos de Chichi <i class="fa-solid fa-hands-holding-circle"></i> </h1>
 
         <p>Sistema de gestión de productos artesanales</p>
 
@@ -95,7 +96,9 @@ $esAdministrador = $_SESSION['rol'] === 'administrador';
         </h2>
 
         <p>
+            <strong>
             Rol:
+        </strong>
             <?= $esAdministrador ? 'Administrador' : 'Vendedor' ?>
         </p>
 
@@ -107,7 +110,7 @@ $esAdministrador = $_SESSION['rol'] === 'administrador';
 
         <a class="tarjeta-menu" href="index.php?accion=listar">
 
-            <div class="icono-menu">📦</div>
+            <div class="icono-menu"> <i class="fa-solid fa-box-open"></i> </div>
 
             <h2>Productos</h2>
 
@@ -122,7 +125,7 @@ $esAdministrador = $_SESSION['rol'] === 'administrador';
 
         <a class="tarjeta-menu" href="index.php?accion=ventas">
 
-            <div class="icono-menu">🛒</div>
+            <div class="icono-menu"> <i class="fa-solid fa-cash-register"></i> </div>
 
             <h2>Ventas</h2>
 
@@ -135,7 +138,7 @@ $esAdministrador = $_SESSION['rol'] === 'administrador';
 
         <a class="tarjeta-menu" href="index.php?accion=liquidaciones">
 
-            <div class="icono-menu">📊</div>
+            <div class="icono-menu"> <i class="fa-solid fa-chart-line"></i> </div>
 
             <h2>Liquidaciones mensuales</h2>
 

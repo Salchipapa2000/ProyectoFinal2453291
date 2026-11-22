@@ -90,10 +90,8 @@ class ProductoController
                 $nombre === '' ||
                 $categoria === '' ||
                 !$precioValido ||
-                !$existenciaValida &&
-                $existenciaValida !== 0 ||
-                !$minimaValida &&
-                $minimaValida !== 0
+                ($existenciaValida === false && $existenciaTexto !== '0') ||
+                ($minimaValida === false && $minimaTexto !== '0')
             ) {
                 $error = 'Completa todos los campos con valores válidos.';
             } elseif (
@@ -125,12 +123,6 @@ class ProductoController
     {
         $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
 
-        if (!validarTokenCSRF()) {
-                http_response_code(403);
-                echo "Solicitud rechazada: token de seguridad inválido.";
-                return;
-            }
-
         if (!$id) {
             http_response_code(400);
             echo "El identificador del producto no es válido.";
@@ -149,11 +141,11 @@ class ProductoController
         $error = null;
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $artesano_id = filter_input(
-                INPUT_POST,
-                'artesano_id',
-                FILTER_VALIDATE_INT
-            );
+        if (!validarTokenCSRF()) {
+            http_response_code(403);
+            echo "Solicitud rechazada: token de seguridad inválido.";
+            return;
+        }
 
             $nombre = trim($_POST['nombre'] ?? '');
             $categoria = trim($_POST['categoria'] ?? '');

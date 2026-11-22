@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Editar producto | Manos de Chichi</title>
@@ -17,10 +18,10 @@
         <?php endif; ?>
 
         <form
-            method="POST"
-            action="index.php?accion=editar&id=<?= (int) $producto['id'] ?>"
-        >
-            <label for="artesano_id">Artesano</label>
+        method="POST"
+        action="index.php?accion=editar&id=<?= (int) $producto['id'] ?>" >
+        <?= campoTokenCSRF() ?>
+        <label for="artesano_id">Artesano</label>
             <select name="artesano_id" id="artesano_id" required>
                 <?php foreach ($artesanos as $artesano): ?>
                     <option
@@ -85,12 +86,15 @@
                 required
             >
 
-            <button type="submit" class="boton">Guardar cambios</button>
-        </form>
+            <button type="submit" class="boton">
+                <i class="fa-solid fa-solidLarge fa-bookmark">‌</i> Guardar cambios
+            </button>
 
-        <a class="enlace-volver" href="index.php?accion=listar">
-            Cancelar y volver
-        </a>
+            <a class="boton" href="index.php?accion=listar"> 
+                <i class="fa-solid fa-solidLarge fa-reply">‌</i> Cancelar y volver
+            </a>
+
+        </form>        
     </main>
 </body>
 </html>

@@ -7,6 +7,7 @@ function escapar($valor) {
 <!DOCTYPE html>
 <html lang="es">
 <head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registrar venta</title>
@@ -17,12 +18,19 @@ function escapar($valor) {
 <div class="contenedor">
     <h1>Registrar venta</h1>
 
-    <p>Usuario: <?= escapar($_SESSION['nombre']) ?></p>
+    <p >Usuario: <?= escapar($_SESSION['nombre']) ?></p>
+    
+    <a class="boton" href="index.php?accion=listar">
+                <i class="fa-solid fa-box-open"></i> Ir a productos
+            </a>
 
-    <p>
-        <a href="index.php?accion=listar">Volver a productos</a> |
-        <a href="index.php?accion=logout">Cerrar sesión</a>
-    </p>
+    <a class="boton" href="index.php?accion=inicio">
+                <i class="fa-solid fa-house"></i> Ir al inicio
+            </a>
+
+<a class="boton" href="index.php?accion=logout">
+                <i class="fa-solid fa-solidLarge fa-sign-in">‌</i> Cerrar sesión
+            </a>
 
     <?php if (isset($_GET['exito'])): ?>
         <p class="mensaje-exito">¡Venta registrada correctamente!</p>
@@ -69,13 +77,17 @@ function escapar($valor) {
 
         </div>
 
-        <button type="button" id="agregar">
-            Agregar otro producto
+        <div class="acciones-venta">
+        <button type="button" id="agregar" class="boton boton-secundario">
+            <i class="fa-solid fa-plus"></i> Agregar otro producto
         </button>
 
-        <h3 id="total">Total: Q0.00</h3>
+        <button type="submit" class="boton">
+            <i class="fa-solid fa-check"></i> Registrar venta
+        </button>
+    </div>
 
-        <button type="submit">Registrar venta</button>
+    <h3 id="total">Total: Q0.00</h3>
 
     </form>
 </div>
@@ -179,7 +191,9 @@ document.getElementById('agregar').addEventListener('click', () => {
 
         <span class="alerta"></span>
 
-        <button type="button" class="quitar">Quitar</button>
+        <button type="button" class="quitar boton boton-eliminar">
+            <i class="fa-solid fa-xmark"></i> Quitar
+        </button>
     `;
 
     productosContainer.appendChild(fila);
